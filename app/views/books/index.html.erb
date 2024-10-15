@@ -1,15 +1,20 @@
 <h1>Books</h1>
 
-<%= form_with model: @Book do |f| %>
+ <p>タイトル</p>
+ 
+<!--@books.eachと記述することで、Listレコードの数だけ繰り返し処理-->
+<!--@books（中身はdb内のmigrate)は変数bookに格納されて下記のbook.titleで使用されている-->
+<% @books.each do |book| %>
+ <!--book.[カラム名]と記述することで、レコードのカラムの内容を表示-->
+  <p><%= book.title %></p>
+  <!--詳細リンク-->
+   <%= link_to 'Show', book_path(book.id) %>
   
 <% end %>
 
-<h2>New book</h2>
-<%= form_with model: @Book do |f| %>
-  <h3>Title</h3>
-    <%= f.text_field :title %>
-  <h3>Body</h3>
-    <%= f.text_area :body %>
-    
-  <%= f.submit 'Create Book'%>
+<% @books.each do |book| %>
+ <!--book.[カラム名]と記述することで、レコードのカラムの内容を表示-->
+  <p><%= book.body %></p>
 <% end %>
+
+<p> <%= link_to "new", '/books/new'%></p>

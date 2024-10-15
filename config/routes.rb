@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   # アプリケーショントップ画面をルートパスに設定
   root to: 'homes#top'
+  # post 'books' =>'books#create' #postリクエストが `books` というパスに対して送信された場合に、`books`コントローラーの`create`アクションを呼び出す
   resources :books
 
 

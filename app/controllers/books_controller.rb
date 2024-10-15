@@ -1,31 +1,33 @@
 class BooksController < ApplicationController
   def new
-    @Book = Book.new
-
+   @book = Book.new
   end
 
   def create
-    @Book = Book.new(book_params)
-
-    if @book.save
-
-      flash[:notice] ="投稿成功あとで変更します"
-
-      redirect_to book_path(@book.id)
-
-    else
-      render :index
-    end
+   book = Book.new(book_params)
+    book.save
+     redirect_to book_path(book.id)
   end
 
+
   def index
-    @Book = Book.new
+    @books = Book.all
   end
 
   def show
+    # @bookにBookテーブルのIDが(params[:id])のレコードを取得して格納
+    @book = Book.find(params[:id])
   end
 
   def edit
   end
-  
+
+
+private
+
+def book_params
+  params.require(:book).permit(:title, :body)
+end
+
+
 end
