@@ -20,6 +20,8 @@ class BooksController < ApplicationController
   end
 
   def edit
+    # findメソッドでデータを取得　@bookに格納
+    @book = Book.find(params[:id])
   end
 
 
