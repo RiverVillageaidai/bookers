@@ -1,7 +1,7 @@
 <h1>Books</h1>
 
  <p>タイトル</p>
- 
+
 <!--@books.eachと記述することで、Listレコードの数だけ繰り返し処理-->
 <!--@books（中身はdb内のmigrate)は変数bookに格納されて下記のbook.titleで使用されている-->
 <% @books.each do |book| %>
@@ -9,7 +9,8 @@
   <p><%= book.title %></p>
   <!--詳細リンク-->
    <%= link_to 'Show', book_path(book.id) %>
-   <%= link_to 'Edit', '/books/edit'  %>
+   <!--editリンク　link_to "Edit", Prefix_path(|book|.id)-->
+   <%= link_to "Edit", edit_book_path(book.id) %>
 <% end %>
 
 <% @books.each do |book| %>

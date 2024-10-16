@@ -1,12 +1,13 @@
 class BooksController < ApplicationController
+  
   def new
    @book = Book.new
   end
 
   def create
-   book = Book.new(book_params)
+    book = Book.new(book_params)
     book.save
-     redirect_to book_path(book.id)
+    redirect_to book_path(book.id)
   end
 
 
@@ -23,7 +24,14 @@ class BooksController < ApplicationController
     # findメソッドでデータを取得　@bookに格納
     @book = Book.find(params[:id])
   end
-
+  
+  def update
+    # bookにBookテーブルのIDが(params[:id])のレコードを取得して格納
+    book = Book.find(params[:id])
+    # 格納されたレコードを更新
+    book.update(book_params)
+    redirect_to book_path(book.id)
+  end
 
 private
 
