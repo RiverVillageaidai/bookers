@@ -32,6 +32,15 @@ class BooksController < ApplicationController
     book.update(book_params)
     redirect_to book_path(book.id)
   end
+  
+  def destroy
+    # bookにBookテーブルのIDが(params[:id])のレコードを取得して格納
+    book = Book.find(params[:id])
+    # 削除
+    book.destroy 
+    # 一覧画面にリダイレクト
+    redirect_to '/books'
+  end
 
 private
 

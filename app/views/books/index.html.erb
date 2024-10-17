@@ -10,7 +10,9 @@
   <!--詳細リンク-->
    <%= link_to 'Show', book_path(book.id) %>
    <!--editリンク　link_to "Edit", Prefix_path(|book|.id)-->
-   <%= link_to "Edit", edit_book_path(book.id) %>
+   <%= link_to 'Edit', edit_book_path(book.id) %>
+   <!--メソッドを指定しないとGETになってしまうのでメソッドを指定して-->
+   <%= link_to 'Destroy', book_path(book.id), method: :delete, "data-confirm" => "Are you sure?"  %>
 <% end %>
 
 <% @books.each do |book| %>
