@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  
+
   def new
   # @book = Book.new
   end
@@ -13,7 +13,8 @@ class BooksController < ApplicationController
     # 詳細画面へのリダイレクト
     redirect_to book_path(@book.id)
    else
-     render :index
+    @books = Book.all
+    render :index
    end
   end
 
@@ -32,24 +33,24 @@ class BooksController < ApplicationController
     # findメソッドでデータを取得　@bookに格納
     @book = Book.find(params[:id])
   end
-  
+
   def update
     # bookにBookテーブルのIDが(params[:id])のレコードを取得して格納
-    book = Book.find(params[:id])
+    @book = Book.find(params[:id])
     # 格納されたレコードを更新
-    if book.update(book_params)
+    if @book.update(book_params)
       flash[:notice] = "Book was successfully updated."
-      redirect_to book_path(book.id)
+      redirect_to book_path(@book.id)
     else
-      render :index
+      render :edit
     end
   end
-  
+
   def destroy
     # bookにBookテーブルのIDが(params[:id])のレコードを取得して格納
     book = Book.find(params[:id])
     # 削除
-    book.destroy 
+    book.destroy
     # 一覧画面にリダイレクト
     redirect_to '/books'
   end

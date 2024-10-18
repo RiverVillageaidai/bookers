@@ -4,12 +4,12 @@
 
 
 <table>
- 
+
  <tr>
   <th>Title</th>
   <th>Body</th>
  </tr>
- 
+
  <% @books.each do |book| %>
  <tr>
    <!--book.[カラム名]と記述することで、レコードのカラムの内容を表示-->
@@ -23,16 +23,25 @@
   <td><%= link_to 'Destroy', book_path(book.id), method: :delete, "data-confirm" => "Are you sure?"  %></td>
  </tr>
  <% end %>
- 
+
 </table>
- 
+<!--バリデーションによるエラーメッセージ-->
+<% if @book.errors.any? %>
+ <%= @book.errors.count %> errors prohibited this book from being saved:
+ <ul>
+  <% @book.errors.full_messages.each do|message| %>
+   <li><%= message %></li>
+  <% end %>
+ </ul>
+ <% end %>
+
 <h2>New book</h2>
 <%= form_with model: @book do |f| %>
   <h3>Title</h3>
     <%= f.text_field :title %>
   <h3>Body</h3>
     <%= f.text_area :body %>
-    
+
   <p><%= f.submit 'Create Book'%></p>
-  
+
 <% end %>
