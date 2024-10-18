@@ -5,9 +5,16 @@ class BooksController < ApplicationController
   end
 
   def create
-    book = Book.new(book_params)
-    book.save
-    redirect_to book_path(book.id)
+    @book = Book.new(book_params)
+    # 保存
+   if @book.save
+    # フラッシュメッセージ表示用
+    flash[:notice] = "Book was successfully created."
+    # 詳細画面へのリダイレクト
+    redirect_to book_path(@book.id)
+   else
+     render :index
+   end
   end
 
 
@@ -30,8 +37,12 @@ class BooksController < ApplicationController
     # bookにBookテーブルのIDが(params[:id])のレコードを取得して格納
     book = Book.find(params[:id])
     # 格納されたレコードを更新
-    book.update(book_params)
-    redirect_to book_path(book.id)
+    if book.update(book_params)
+      flash[:notice] = "Book was successfully updated."
+      redirect_to book_path(book.id)
+    else
+      render :index
+    end
   end
   
   def destroy
