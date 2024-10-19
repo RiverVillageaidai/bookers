@@ -17,7 +17,19 @@ label{
 display: block;  
 }
 
-td, p, ul {
+#error_explanation {
+  font-size: 13px;
+  background-color: #F0F0F0;
+  border: 2px solid red;
+}
+#error_explanation h2{
+  font-size: 13px;
+  color: #FFFFFF;
+  background-color: red;
+}
+  
+
+td, p, ul{
   font-size: 13px;
   line-height: 18px;
   margin: 33px;
