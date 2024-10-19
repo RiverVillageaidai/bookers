@@ -1,30 +1,35 @@
 <h1>Books</h1>
-<!--@books.eachと記述することで、Listレコードの数だけ繰り返し処理-->
-<!--@books（中身はdb内のmigrate)は変数bookに格納されて下記のbook.titleで使用されている-->
-
 
 <table>
-
- <tr>
-  <th>Title</th>
-  <th>Body</th>
- </tr>
-
- <% @books.each do |book| %>
- <tr>
+ 
+ <thead>
+  <tr>
+   <th>Title</th>
+   <th>Body</th>
+   <th colspan = "3"></th>
+  </tr>
+ </thead>
+ 
+ <tbody>
+  <!--@books.eachと記述することで、Listレコードの数だけ繰り返し処理-->
+  <!--@books（中身はdb内のmigrate)は変数bookに格納されて下記のbook.titleで使用されている-->
+  <% @books.each do |book| %>
+  <tr>
    <!--book.[カラム名]と記述することで、レコードのカラムの内容を表示-->
-  <td><%= book.title %></td>
-  <td><%= book.body %></td>
+   <td><%= book.title %></td>
+   <td><%= book.body %></td>
    <!--詳細リンク-->
-  <td><%= link_to 'Show', book_path(book.id) %></td>
+   <td><%= link_to 'Show', book_path(book.id) %></td>
    <!--editリンク　link_to "Edit", Prefix_path(|book|.id)-->
-  <td><%= link_to 'Edit', edit_book_path(book.id) %></td>
+   <td><%= link_to 'Edit', edit_book_path(book.id) %></td>
    <!--メソッドを指定しないとGETになってしまうのでメソッドを指定して-->
-  <td><%= link_to 'Destroy', book_path(book.id), method: :delete, "data-confirm" => "Are you sure?"  %></td>
- </tr>
- <% end %>
-
+   <td><%= link_to 'Destroy', book_path(book.id), method: :delete, "data-confirm" => "Are you sure?"  %></td>
+  </tr>
+  <% end %>
+ </tbody>
+ 
 </table>
+
 <!--バリデーションによるエラーメッセージ-->
 <% if @book.errors.any? %>
  <%= @book.errors.count %> errors prohibited this book from being saved:
@@ -36,12 +41,17 @@
  <% end %>
 
 <h2>New book</h2>
-<%= form_with model: @book do |f| %>
-  <h3>Title</h3>
-    <%= f.text_field :title %>
-  <h3>Body</h3>
-    <%= f.text_area :body %>
+<%= form_with model: @book, html:{class: "new_book"} do |f| %>
+ <div class = "field">
+  <label for="book_title">Title</label>
+   <%= f.text_field :title,  :class => 'book_title' %>
+ </div>
 
-  <p><%= f.submit 'Create Book'%></p>
+   
+ <div class = "field">
+  <label for = "book_body">Body</label>
+    <%= f.text_area :body, :class => 'book_body' %>
+ </div>
+  <div class = "actions"><%= f.submit 'Create Book'%></div>
 
 <% end %>
